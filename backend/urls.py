@@ -24,12 +24,26 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
-from django.http import HttpResponse
+from django.http import JsonResponse, HttpResponse
+
 
 def home(request):
     return HttpResponse("Deployment successful! Django is running.")
 
+
+def stock_data(request):
+    data = {
+        "message": "Stock data API working",
+        "price": 2500,
+        "volume": 100000,
+        "status": "success"
+    }
+    return JsonResponse(data)
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home),
+    path('stock data', stock_data),
 ]
+
